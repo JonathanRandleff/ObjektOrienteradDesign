@@ -40,9 +40,12 @@ public class Sale {
      * @param item The item which is being purchased.
      * @param quantity The amount of "item" is being purchased.
      */
-    public void addItem(ItemsDTO item, int quantity) {
+    public void addItem(ItemsDTO item, int quantity) throws ItemNotFoundException {
         this.item = item;
         itemsRegistry = new ItemsRegistry();
+            if (itemsRegistry.itemIdNotFound(item)) {
+                throw new ItemNotFoundException(item);
+            }
         itemPrice = (itemsRegistry.getItemPrice(item));
         itemDescription = (itemsRegistry.getItemDescription(item));
         runningTotal += itemPrice * quantity;

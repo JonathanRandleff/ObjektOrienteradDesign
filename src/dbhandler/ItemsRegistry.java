@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ItemsRegistry {
     private List<ItemsData> Items = new ArrayList<>();
+    private boolean idNotFound;
 
     public ItemsRegistry() {
         addItems();
@@ -60,17 +61,27 @@ public class ItemsRegistry {
         return itemGetInfo.discountedPrice;
     }
 
+    public boolean itemIdNotFound (ItemsDTO item) {
+        ItemsData itemGetInfo = findItemsByItemId(item);
+        return idNotFound;
+    }
+
     /**
      * Searching for item matching the given itemID.
      * @param searchedItem The object containing the search criteria.
      * @return An item matching the given itemID or otherwise null
      */
-    private ItemsData findItemsByItemId (ItemsDTO searchedItem) {
+    private ItemsData findItemsByItemId (ItemsDTO searchedItem) throws ItemsRegistryException {
+        if (searchedItem.getItemID().equals("0")) {
+            throw new ItemsRegistryException("Database not reachable");
+        }
         for (ItemsData Item : Items) {
             if (Item.itemID.equals(searchedItem.getItemID())) {
+                idNotFound = false;
                 return Item;
             }
         }
+        idNotFound = true;
         return null;
     }
 

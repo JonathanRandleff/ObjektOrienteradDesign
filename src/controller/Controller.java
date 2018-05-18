@@ -1,6 +1,7 @@
 package controller;
 
 import dbhandler.*;
+import model.ItemNotFoundException;
 import model.Sale;
 
 
@@ -41,7 +42,7 @@ public class Controller {
      * @param itemID The itemID number entered to find the purchased item in the system.
      * @param quantity The amount of same values being purchased.
      */
-    public void inputItem(String itemID, int quantity) {
+    public void inputItem(String itemID, int quantity) throws ItemNotFoundException {
         item = new ItemsDTO(itemID,0,null,0);
         sale.addItem(item, quantity);
     }
