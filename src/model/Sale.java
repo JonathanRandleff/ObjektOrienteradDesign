@@ -3,9 +3,10 @@ package model;
 import dbhandler.ItemsDTO;
 import dbhandler.ItemsRegistry;
 import dbhandler.CustomerDTO;
+import dbhandler.Printer;
 
 import java.time.LocalDateTime;
-import dbhandler.Printer;
+
 
 /**
  * Collects all information regarding a particular sale.
@@ -164,5 +165,4 @@ public class Sale {
         Receipt receipt = new Receipt(this);
         printer.printReceipt(receipt);
     }
-
 }
