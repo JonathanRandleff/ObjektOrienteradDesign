@@ -1,7 +1,12 @@
 package controller;
 
 import dbhandler.*;
+import model.ItemNotFoundException;
 import model.Sale;
+import model.SaleObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,6 +21,7 @@ public class Controller {
     private Printer printer;
     private AccountingSystem accountingSystem;
     private InventorySystem inventorySystem;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates a new instance.
@@ -34,6 +40,7 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
+        sale.addSaleObservers(saleObservers);
     }
 
     /**
@@ -41,7 +48,7 @@ public class Controller {
      * @param itemID The itemID number entered to find the purchased item in the system.
      * @param quantity The amount of same values being purchased.
      */
-    public void inputItem(String itemID, int quantity) {
+    public void inputItem(String itemID, int quantity) throws ItemNotFoundException {
         item = new ItemsDTO(itemID,0,null,0);
         sale.addItem(item, quantity);
     }
@@ -83,5 +90,8 @@ public class Controller {
         accountingSystem = new AccountingSystem(sale);
         inventorySystem = new InventorySystem(sale);
         sale.printReceipt(printer);
+    }
+    public void addSaleObserver(SaleObserver obs) {
+        saleObservers.add(obs);
     }
 }

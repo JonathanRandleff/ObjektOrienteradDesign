@@ -3,9 +3,12 @@ package model;
 import dbhandler.ItemsDTO;
 import dbhandler.ItemsRegistry;
 import dbhandler.CustomerDTO;
+import dbhandler.Printer;
 
 import java.time.LocalDateTime;
-import dbhandler.Printer;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Collects all information regarding a particular sale.
@@ -25,8 +28,10 @@ public class Sale {
     private double changeAmount;
     private double paidAmount;
     private StringBuilder builder = new StringBuilder();
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     private static final double TAX_PERCENTAGE = 1.25;
+
     /**
      * Creates a new instance, and records the time it was created. This will be the time recorded
      * on the receipt.
@@ -40,9 +45,12 @@ public class Sale {
      * @param item The item which is being purchased.
      * @param quantity The amount of "item" is being purchased.
      */
-    public void addItem(ItemsDTO item, int quantity) {
+    public void addItem(ItemsDTO item, int quantity) throws ItemNotFoundException {
         this.item = item;
         itemsRegistry = new ItemsRegistry();
+            if (itemsRegistry.itemIdNotFound(item)) {
+                throw new ItemNotFoundException(item);
+            }
         itemPrice = (itemsRegistry.getItemPrice(item));
         itemDescription = (itemsRegistry.getItemDescription(item));
         runningTotal += itemPrice * quantity;
@@ -160,6 +168,16 @@ public class Sale {
     public void printReceipt(Printer printer) {
         Receipt receipt = new Receipt(this);
         printer.printReceipt(receipt);
+        notifyObservers();
     }
 
+    private void notifyObservers() {
+        for (SaleObserver obs : saleObservers) {
+            obs.newSale(this);
+        }
+    }
+
+    public void addSaleObservers(List<SaleObserver> observers) {
+        saleObservers.addAll(observers);
+    }
 }
