@@ -133,8 +133,11 @@ public class Sale {
      * Notifies observer that sale is completed.
      * @param paidAmount The amount paid by the customer
      */
-    public void pay(double paidAmount) {
+    public void pay(double paidAmount) throws PaymentNotEnoughException {
         this.paidAmount = paidAmount;
+        if (paidAmount < getTotalWithTaxes()) {
+            throw new PaymentNotEnoughException();
+        }
         notifyObservers();
     }
 

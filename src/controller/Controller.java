@@ -2,6 +2,7 @@ package controller;
 
 import dbhandler.*;
 import model.ItemNotFoundException;
+import model.PaymentNotEnoughException;
 import model.Sale;
 import model.SaleObserver;
 
@@ -86,7 +87,7 @@ public class Controller {
      *  Prints the receipt.
      * @param paidAmount The paid amount.
      */
-    public void payment(double paidAmount) {
+    public void payment(double paidAmount) throws PaymentNotEnoughException {
         sale.pay(paidAmount);
         sale.changeAmount(paidAmount);
         accountingSystem = new AccountingSystem(sale);

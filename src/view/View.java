@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 import dbhandler.ItemsRegistryException;
 import model.ItemNotFoundException;
+import model.PaymentNotEnoughException;
 import util.LogHandler;
 
 /**
@@ -63,7 +64,11 @@ public class View {
         contr.discountRequest("6");
         System.out.println("Total With Taxes and Discount: " + contr.priceToPay());
         double paidAmount = 18000;
-        contr.payment(paidAmount);
+        try {
+            contr.payment(paidAmount);
+        } catch (PaymentNotEnoughException exc) {
+            handleException("Not enough money paid",exc);
+        }
         System.out.println("----------------- Exception log follows --------------");
         System.out.println(logger.getLog());
         System.out.println("----------------- Exception log ends --------------");
