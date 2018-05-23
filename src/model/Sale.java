@@ -28,10 +28,10 @@ public class Sale {
     private double changeAmount;
     private double paidAmount;
     private StringBuilder builder = new StringBuilder();
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     private static final double TAX_PERCENTAGE = 1.25;
 
-    private List<SaleObserver> saleObservers = new ArrayList<>();
     /**
      * Creates a new instance, and records the time it was created. This will be the time recorded
      * on the receipt.
@@ -176,9 +176,7 @@ public class Sale {
             obs.newSale(this);
         }
     }
-    public void addSaleObserver(SaleObserver obs) {
-        saleObservers.add(obs);
-    }
+
     public void addSaleObservers(List<SaleObserver> observers) {
         saleObservers.addAll(observers);
     }

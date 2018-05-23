@@ -22,8 +22,8 @@ public class TotalRevenueView implements SaleObserver {
     }
 
     private void printOut(double totalIncome) {
-        System.out.println("###############################");
+        System.out.println("#############################################");
         System.out.println("Total income since program start: " + totalIncome);
-        System.out.println("###############################");
+        System.out.println("#############################################\n");
     }
 }
