@@ -3,6 +3,9 @@ package view;
 import model.Sale;
 import model.SaleObserver;
 
+/**
+ * Handles the display for the total amount of all sales.
+ */
 public class TotalRevenueView implements SaleObserver {
 
     private double totalIncome;
@@ -17,10 +20,18 @@ public class TotalRevenueView implements SaleObserver {
         printOut(totalIncome);
     }
 
+    /**
+     * Adds a new sale and calculates the new total of all completed sales.
+     * @param sale The sale to add.
+     */
     private void addNewSale(Sale sale) {
         totalIncome += sale.getTotalWithTaxes();
     }
 
+    /**
+     * Prints out the total income of program.
+     * @param totalIncome The total of all sold items.
+     */
     private void printOut(double totalIncome) {
         System.out.println("\n#############################################");
         System.out.println("Total income since program start: " + totalIncome);
