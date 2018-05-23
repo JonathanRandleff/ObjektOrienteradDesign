@@ -20,7 +20,7 @@ public class Receipt {
      */
     public String createReceiptString() {
         StringBuilder builder = new StringBuilder();
-        appendLine(builder, "Receipt:");
+        appendLine(builder, "----------------- Receipt -----------------");
         builder.append("\n");
 
         builder.append("Time of sale: ");
@@ -34,6 +34,7 @@ public class Receipt {
         builder.append("Change: ");
         appendLine(builder, Double.toString(sale.getChangeAmount()));
         builder.append("\n");
+        builder.append("----------------- Receipt ends --------------\n");
 
         return builder.toString();
     }

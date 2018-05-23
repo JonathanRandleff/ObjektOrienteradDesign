@@ -3,6 +3,10 @@ package controller;
 import dbhandler.*;
 import model.ItemNotFoundException;
 import model.Sale;
+import model.SaleObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,6 +21,7 @@ public class Controller {
     private Printer printer;
     private AccountingSystem accountingSystem;
     private InventorySystem inventorySystem;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates a new instance.
@@ -35,6 +40,7 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
+        sale.addSaleObservers(saleObservers);
     }
 
     /**
@@ -84,5 +90,8 @@ public class Controller {
         accountingSystem = new AccountingSystem(sale);
         inventorySystem = new InventorySystem(sale);
         sale.printReceipt(printer);
+    }
+    public void addSaleObserver(SaleObserver obs) {
+        saleObservers.add(obs);
     }
 }

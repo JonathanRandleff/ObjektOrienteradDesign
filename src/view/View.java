@@ -19,6 +19,7 @@ public class View {
      */
     public View(Controller contr) {
         this.contr = contr;
+        contr.addSaleObserver(new TotalRevenueView());
         this.logger = new LogHandler();
     }
     
@@ -69,9 +70,7 @@ public class View {
         contr.discountRequest("6");
         System.out.println("Total With Taxes and Discount: " + contr.priceToPay());
         double paidAmount = 18000;
-        System.out.println("----------------- Receipt follows --------------");
         contr.payment(paidAmount);
-        System.out.println("----------------- Receipt ends --------------\n");
         System.out.println("----------------- Exception log follows --------------");
         System.out.println(logger.printLog());
         System.out.println("----------------- Exception log ends --------------");

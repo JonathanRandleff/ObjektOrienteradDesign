@@ -4,5 +4,5 @@ import dbhandler.ItemsDTO;
 
 public interface SaleObserver {
 
-    void newSale(ItemsDTO item);
+    void newSale(Sale sale);
 }
