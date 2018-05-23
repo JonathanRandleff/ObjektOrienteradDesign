@@ -44,6 +44,7 @@ public class Sale {
      * Adds items to the current sale, and calculates and retrieves information about the current item.
      * @param item The item which is being purchased.
      * @param quantity The amount of "item" is being purchased.
+     * @throws ItemNotFoundException when searched item is not found in inventory catalog.
      */
     public void addItem(ItemsDTO item, int quantity) throws ItemNotFoundException {
         this.item = item;
@@ -129,10 +130,12 @@ public class Sale {
 
     /**
      * This sale is paid using the specified payment.
+     * Notifies observer that sale is completed.
      * @param paidAmount The amount paid by the customer
      */
     public void pay(double paidAmount) {
         this.paidAmount = paidAmount;
+        notifyObservers();
     }
 
     /**
@@ -168,15 +171,22 @@ public class Sale {
     public void printReceipt(Printer printer) {
         Receipt receipt = new Receipt(this);
         printer.printReceipt(receipt);
-        notifyObservers();
     }
 
+    /**
+     * Will notify the observer when called upon
+     */
     private void notifyObservers() {
         for (SaleObserver obs : saleObservers) {
             obs.newSale(this);
         }
     }
 
+    /**
+     * All the specified observers will be notified when this sale has been finalized.
+     *
+     * @param observers The observers to notify.
+     */
     public void addSaleObservers(List<SaleObserver> observers) {
         saleObservers.addAll(observers);
     }

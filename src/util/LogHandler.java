@@ -2,17 +2,29 @@ package util;
 
 import java.time.LocalDateTime;
 
+/**
+ * Handles the creation of logs.
+ */
 public class LogHandler {
 
-    private StringBuilder builder = new StringBuilder();
+    private StringBuilder exceptionLog = new StringBuilder();
 
-        public void createLog(Exception exc) {
-            builder.append("\nTime of exception: ");
-            builder.append(LocalDateTime.now().toString() + "\n");
-            builder.append(exc + "\n");
-            builder.toString();
+    /**
+     * Creates and adds relevant information to a log for Exceptions
+     * @param exc The thrown exception.
+     */
+    public void createExceptionLog(Exception exc) {
+        exceptionLog.append("\nTime of exception: ");
+        exceptionLog.append(LocalDateTime.now().toString() + "\n");
+        exceptionLog.append(exc + "\n");
+        exceptionLog.toString();
         }
-        public String printLog() {
-            return builder.toString();
+
+    /**
+     *
+     * @return The exception log.
+     */
+    public String getLog() {
+            return exceptionLog.toString();
         }
     }

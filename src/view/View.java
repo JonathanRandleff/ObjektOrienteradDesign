@@ -35,10 +35,8 @@ public class View {
             System.out.println("Item successfully added\n");
             System.out.println(contr.getSaleInfo());
         } catch (ItemNotFoundException exc) {
-            //System.out.println("Item ID not found, was the correct ID entered?\n");
             handleException("Item ID not found, was the correct ID entered?\n", exc);
         } catch (ItemsRegistryException exc) {
-            //System.out.println("Database not reachable\n");
             handleException("Database not reachable\n", exc);
         }
         try {
@@ -47,10 +45,8 @@ public class View {
             System.out.println("Item successfully added\n");
             System.out.println(contr.getSaleInfo());
         } catch (ItemNotFoundException exc) {
-            //System.out.println("Item ID not found, was the correct ID entered?\n");
             handleException("Item ID not found, was the correct ID entered?\n", exc);
         } catch (ItemsRegistryException exc) {
-            //System.out.println("Database not reachable\n");
             handleException("Database not reachable\n", exc);
         }
         try {
@@ -59,25 +55,27 @@ public class View {
             System.out.println("Item successfully added\n");
             System.out.println(contr.getSaleInfo());
         } catch (ItemNotFoundException exc) {
-            //System.out.println("Item ID not found, was the correct ID entered?\n");
             handleException("Item ID not found, was the correct ID entered?\n", exc);
         } catch (ItemsRegistryException exc) {
-            //System.out.println("Database not reachable\n");
             handleException("Database not reachable\n", exc);
         }
-
         System.out.println("Total With Taxes: " + contr.priceToPay());
         contr.discountRequest("6");
         System.out.println("Total With Taxes and Discount: " + contr.priceToPay());
         double paidAmount = 18000;
         contr.payment(paidAmount);
         System.out.println("----------------- Exception log follows --------------");
-        System.out.println(logger.printLog());
+        System.out.println(logger.getLog());
         System.out.println("----------------- Exception log ends --------------");
-
     }
+
+    /**
+     * Handles exceptions, creates user error message and logs error message for developers.
+     * @param uiMsg The error message sent to user.
+     * @param exc The error message logged for developers.
+     */
     private void handleException(String uiMsg, Exception exc) {
         System.out.println(uiMsg);
-        logger.createLog(exc);
+        logger.createExceptionLog(exc);
     }
 }

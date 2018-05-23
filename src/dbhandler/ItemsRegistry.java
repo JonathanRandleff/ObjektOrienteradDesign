@@ -68,8 +68,11 @@ public class ItemsRegistry {
 
     /**
      * Searching for item matching the given itemID.
+     * Hardcoded error to simulate not reaching database
+     *
      * @param searchedItem The object containing the search criteria.
      * @return An item matching the given itemID or otherwise null
+     * @throws ItemsRegistryException when database is not reachable
      */
     private ItemsData findItemsByItemId (ItemsDTO searchedItem) throws ItemsRegistryException {
         if (searchedItem.getItemID().equals("0")) {

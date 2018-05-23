@@ -15,5 +15,4 @@ public class AccountingSystem {
     public AccountingSystem (Sale sale) {
         this.sale = sale;
     }
-
 }

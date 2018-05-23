@@ -8,7 +8,6 @@ import model.SaleObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * This is the application's only controller. All calls to the model pass through here.
  */
@@ -37,6 +36,8 @@ public class Controller {
     /**
      * Creates an empty instance of {@link Sale}, which will be used for all information regarding
      * the sale that is now started.
+     *
+     * Adds a sale observer.
      */
     public void startSale() {
         sale = new Sale();
@@ -47,6 +48,7 @@ public class Controller {
      * Inputs an item to be purchased into the system.
      * @param itemID The itemID number entered to find the purchased item in the system.
      * @param quantity The amount of same values being purchased.
+     * @throws ItemNotFoundException if the item is not found in database.
      */
     public void inputItem(String itemID, int quantity) throws ItemNotFoundException {
         item = new ItemsDTO(itemID,0,null,0);
@@ -91,6 +93,11 @@ public class Controller {
         inventorySystem = new InventorySystem(sale);
         sale.printReceipt(printer);
     }
+
+    /**
+     * The observer will be notified when a sale has been finalized.
+     * @param obs The observer
+     */
     public void addSaleObserver(SaleObserver obs) {
         saleObservers.add(obs);
     }

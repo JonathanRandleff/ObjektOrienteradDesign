@@ -22,5 +22,4 @@ public class RegistryCreator {
     public CustomerRegistry getCustomerRegistry() {
         return CustomerRegistry;
     }
-
 }
