@@ -22,11 +22,9 @@ public class Receipt {
         StringBuilder builder = new StringBuilder();
         appendLine(builder, "----------------- Receipt -----------------");
         builder.append("\n");
-
         builder.append("Time of sale: ");
         appendLine(builder, sale.getTimeStamp().toString());
         builder.append("\n");
-
         builder.append("Items Bought: " + "\n");
         appendLine(builder, sale.getItemInfo());
         builder.append("Total Cost: ");
@@ -35,7 +33,6 @@ public class Receipt {
         appendLine(builder, Double.toString(sale.getChangeAmount()));
         builder.append("\n");
         builder.append("----------------- Receipt ends --------------\n");
-
         return builder.toString();
     }
 

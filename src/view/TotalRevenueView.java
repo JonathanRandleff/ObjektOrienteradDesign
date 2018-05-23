@@ -1,6 +1,5 @@
 package view;
 
-import dbhandler.ItemsDTO;
 import model.Sale;
 import model.SaleObserver;
 
@@ -8,9 +7,10 @@ public class TotalRevenueView implements SaleObserver {
 
     private double totalIncome;
 
-    public TotalRevenueView () {
-    }
-
+    /**
+     * Creates a new instance and calls methods.
+     * @param sale The current sale
+     */
     @Override
     public void newSale(Sale sale) {
         addNewSale(sale);
@@ -22,7 +22,7 @@ public class TotalRevenueView implements SaleObserver {
     }
 
     private void printOut(double totalIncome) {
-        System.out.println("#############################################");
+        System.out.println("\n#############################################");
         System.out.println("Total income since program start: " + totalIncome);
         System.out.println("#############################################\n");
     }
